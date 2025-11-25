@@ -1,0 +1,2 @@
+# Gig-path-Job-portal-backend
+Empowering Blue/Grey collar workers with job card for quick job accessibility and turning them reliable and trustworthy candidates thus easing the Employer's burden for selectivity.
