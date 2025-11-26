@@ -9,6 +9,8 @@ public interface WorkerService {
 
     WorkerResponseDTO registerWorker(WorkerRegistrationDTO workerInputData);
 
+    WorkerResponseDTO login(String username, String password);
+
     WorkerResponseDTO getWorker(Long workerId);
 
     List<WorkerResponseDTO> getAllWorkers();

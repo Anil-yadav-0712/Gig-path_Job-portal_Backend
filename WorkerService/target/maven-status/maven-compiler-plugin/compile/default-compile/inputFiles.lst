@@ -4,6 +4,7 @@ C:\Users\dell\Desktop\ONEST_Hackathon\JobATM backend\WorkerService\src\main\java
 C:\Users\dell\Desktop\ONEST_Hackathon\JobATM backend\WorkerService\src\main\java\com\syntacs\jobatm\WorkerService\util\CompletionStatus.java
 C:\Users\dell\Desktop\ONEST_Hackathon\JobATM backend\WorkerService\src\main\java\com\syntacs\jobatm\WorkerService\config\SecurityConfig.java
 C:\Users\dell\Desktop\ONEST_Hackathon\JobATM backend\WorkerService\src\main\java\com\syntacs\jobatm\WorkerService\dto\WorkerAssignedJobHistoryDTO.java
+C:\Users\dell\Desktop\ONEST_Hackathon\JobATM backend\WorkerService\src\main\java\com\syntacs\jobatm\WorkerService\dto\LoginRequestDTO.java
 C:\Users\dell\Desktop\ONEST_Hackathon\JobATM backend\WorkerService\src\main\java\com\syntacs\jobatm\WorkerService\util\ApplicationStatus.java
 C:\Users\dell\Desktop\ONEST_Hackathon\JobATM backend\WorkerService\src\main\java\com\syntacs\jobatm\WorkerService\service\WorkerServiceImpl.java
 C:\Users\dell\Desktop\ONEST_Hackathon\JobATM backend\WorkerService\src\main\java\com\syntacs\jobatm\WorkerService\service\WorkerService.java
@@ -25,6 +26,7 @@ C:\Users\dell\Desktop\ONEST_Hackathon\JobATM backend\WorkerService\src\main\java
 C:\Users\dell\Desktop\ONEST_Hackathon\JobATM backend\WorkerService\src\main\java\com\syntacs\jobatm\WorkerService\repository\WorkerDocumentRepository.java
 C:\Users\dell\Desktop\ONEST_Hackathon\JobATM backend\WorkerService\src\main\java\com\syntacs\jobatm\WorkerService\util\PreferredLanguage.java
 C:\Users\dell\Desktop\ONEST_Hackathon\JobATM backend\WorkerService\src\main\java\com\syntacs\jobatm\WorkerService\util\RegistrationSource.java
+C:\Users\dell\Desktop\ONEST_Hackathon\JobATM backend\WorkerService\src\main\java\com\syntacs\jobatm\WorkerService\config\WebConfig.java
 C:\Users\dell\Desktop\ONEST_Hackathon\JobATM backend\WorkerService\src\main\java\com\syntacs\jobatm\WorkerService\entity\WorkerDocument.java
 C:\Users\dell\Desktop\ONEST_Hackathon\JobATM backend\WorkerService\src\main\java\com\syntacs\jobatm\WorkerService\dto\WorkerDocumentDTO.java
 C:\Users\dell\Desktop\ONEST_Hackathon\JobATM backend\WorkerService\src\main\java\com\syntacs\jobatm\WorkerService\entity\WorkerAssignedJobsHistory.java

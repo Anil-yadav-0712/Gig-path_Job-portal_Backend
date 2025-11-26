@@ -2,5 +2,5 @@
 package com.syntacs.jobatm.WorkerService.util;
 
 public enum AttendanceStatus {
-    PRESENT_ONTIME, PRESENT_LATE, ABSENT
+    PRESENT, PRESENT_ONTIME, PRESENT_LATE, ABSENT
 }

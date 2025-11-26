@@ -8,6 +8,7 @@ import com.syntacs.jobatm.WorkerService.repository.WorkerRepository;
 import com.syntacs.jobatm.WorkerService.util.CompletionStatus;
 import com.syntacs.jobatm.WorkerService.util.NfcCardStatus;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -17,11 +18,13 @@ import java.util.stream.Collectors;
 @Service
 public class WorkerServiceImpl implements WorkerService {
 
+    @Autowired
     private final WorkerRepository workerRepository;
+
     private final RestTemplate restTemplate;
 
     public WorkerServiceImpl(WorkerRepository workerRepository,
-                             RestTemplate restTemplate) {
+            RestTemplate restTemplate) {
         this.workerRepository = workerRepository;
         this.restTemplate = restTemplate;
     }
@@ -37,6 +40,20 @@ public class WorkerServiceImpl implements WorkerService {
 
         Worker saved = workerRepository.save(worker);
         return WorkerMapper.toDTO(saved);
+    }
+
+    @Override
+    public WorkerResponseDTO login(String username, String password) {
+
+        Worker worker = workerRepository.findByWorkerEmail(username)
+                .or(() -> workerRepository.findByWorkerPhone(username))
+                .orElseThrow(() -> new RuntimeException("Invalid username or password"));
+
+        // TEMPORARY: plain-text comparison
+        if (!password.equals(worker.getWorkerPasswordHash())) {
+            throw new RuntimeException("Invalid username or password");
+        }
+        return WorkerMapper.toDTO(worker);
     }
 
     @Override
@@ -109,20 +126,20 @@ public class WorkerServiceImpl implements WorkerService {
         return WorkerMapper.toDTO(updated);
     }
 
-   @Override
-public WorkerResponseDTO recalculateGigLevel(Long workerId) {
-    Worker worker = workerRepository.findById(workerId)
-            .orElseThrow(() -> new RuntimeException("Worker not found"));
+    @Override
+    public WorkerResponseDTO recalculateGigLevel(Long workerId) {
+        Worker worker = workerRepository.findById(workerId)
+                .orElseThrow(() -> new RuntimeException("Worker not found"));
 
-    double totalJobs = worker.getAssignedJobs().size();
-    double completedJobs = worker.getAssignedJobs().stream()
-            .filter(j -> j.getCompletionStatus() == CompletionStatus.COMPLETED)
-            .count();
+        double totalJobs = worker.getAssignedJobs().size();
+        double completedJobs = worker.getAssignedJobs().stream()
+                .filter(j -> j.getCompletionStatus() == CompletionStatus.COMPLETED)
+                .count();
 
-    double gigLevel = totalJobs == 0 ? 1.0 : (completedJobs / totalJobs) * 5; // scale 1–5
-    worker.setGigLevel(Math.min(Math.max(gigLevel, 1.0), 5.0));
+        double gigLevel = totalJobs == 0 ? 1.0 : (completedJobs / totalJobs) * 5; // scale 1–5
+        worker.setGigLevel(Math.min(Math.max(gigLevel, 1.0), 5.0));
 
-    Worker updated = workerRepository.save(worker);
-    return WorkerMapper.toDTO(updated);
-}
+        Worker updated = workerRepository.save(worker);
+        return WorkerMapper.toDTO(updated);
+    }
 }

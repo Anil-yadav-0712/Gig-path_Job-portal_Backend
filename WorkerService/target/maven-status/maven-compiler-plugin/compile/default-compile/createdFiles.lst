@@ -26,9 +26,11 @@ com\syntacs\jobatm\WorkerService\entity\Worker.class
 com\syntacs\jobatm\WorkerService\entity\WorkerAssignedJobsHistory.class
 com\syntacs\jobatm\WorkerService\util\PreferredLanguage.class
 com\syntacs\jobatm\WorkerService\dto\WorkerRegistrationDTO$DocumentUploadDTO.class
+com\syntacs\jobatm\WorkerService\config\WebConfig.class
 com\syntacs\jobatm\WorkerService\dto\WorkerAssignedJobHistoryDTO.class
 com\syntacs\jobatm\WorkerService\util\ApplicationStatus.class
 com\syntacs\jobatm\WorkerService\WorkerServiceApplication.class
 com\syntacs\jobatm\WorkerService\repository\WorkerLocationHistoryRepository.class
 com\syntacs\jobatm\WorkerService\util\DocumentVerificationStatus.class
+com\syntacs\jobatm\WorkerService\dto\LoginRequestDTO.class
 com\syntacs\jobatm\WorkerService\repository\WorkerDocumentRepository.class
