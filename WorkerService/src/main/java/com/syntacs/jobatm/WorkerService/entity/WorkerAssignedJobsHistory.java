@@ -1,115 +1,119 @@
-package com.syntacs.jobatm.WorkerService.entity;
+// package com.syntacs.jobatm.WorkerService.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.syntacs.jobatm.WorkerService.util.AttendanceStatus;
-import com.syntacs.jobatm.WorkerService.util.CompletionStatus;
+// import com.fasterxml.jackson.annotation.JsonIgnore;
+// import com.syntacs.jobatm.WorkerService.util.AttendanceStatus;
+// import com.syntacs.jobatm.WorkerService.util.CompletionStatus;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
-import lombok.Data;
+// import jakarta.persistence.*;
+// import jakarta.validation.constraints.NotNull;
+// import jakarta.validation.constraints.Size;
+// import lombok.Data;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+// import org.hibernate.annotations.CreationTimestamp;
+// import org.hibernate.annotations.UpdateTimestamp;
+// import java.time.LocalDateTime;
 
-import java.time.LocalDateTime;
+// @Entity
+// @Data
+// @Table(name = "worker_assigned_jobs_history")
+// public class WorkerAssignedJobsHistory {
 
-@Entity
-@Data
-@Table(name = "worker_assigned_jobs_history")
-public class WorkerAssignedJobsHistory {
+//     @Id
+//     @GeneratedValue(strategy = GenerationType.IDENTITY)
+//     private Long jobAssignmentHistoryId;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long assignedHistoryId;
+//     @Column(nullable = false)
+//     private long jobId;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "worker_id", nullable = false)
-    private Worker worker;
+//     // @JsonIgnore
+//     // @ManyToOne(fetch = FetchType.LAZY)
+//     // @JoinColumn(name = "employer_id", nullable = false)
+//     // private Employer assignedBy;
 
-    @NotNull
-    @Column(nullable = false)
-    private Long jobId;
+//     @JsonIgnore
+//     @ManyToOne(fetch = FetchType.LAZY)
+//     @JoinColumn(name = "worker_id", nullable = false)
+//     private Worker assignedTo;
 
-    
-    @Enumerated(EnumType.STRING)
-    private AttendanceStatus attendanceStatus;   // PRESENT -ONTIME, PRESENT -LATE, ABSENT -NEVER ARRIVED
+//     @Enumerated(EnumType.STRING)
+//     private AttendanceStatus attendanceStatus; // PRESENT -ONTIME, PRESENT -LATE, ABSENT -NEVER ARRIVED
 
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private CompletionStatus completionStatus;    // ASSIGNED, IN_PROGRESS, COMPLETED, CANCELLED
+//     @NotNull
+//     @Enumerated(EnumType.STRING)
+//     @Column(nullable = false)
+//     private CompletionStatus completionStatus = CompletionStatus.ASSIGNED; // ASSIGNED, IN_PROGRESS, COMPLETED,
+//                                                                            // CANCELLED
 
-    private Double employerRating;
+//     @Column(nullable = false)
+//     @Size(max = 10)
+//     private double wagePaid;
 
-    @Column(columnDefinition = "TEXT")
-    private String feedback;
+//     // private Float employerRating;
+//     // private Float workerRating;
 
-    private Double wagePaid;
+//     // @Column(columnDefinition = "TEXT")
+//     // private String feedback;
 
-    
+//     @CreationTimestamp
+//     @Column(nullable = false, updatable = false)
+//     private LocalDateTime createdAtTime;
 
-    private LocalDateTime startDate;
+//     @UpdateTimestamp
+//     @Column(nullable = false)
+//     private LocalDateTime updatedAtTime;
 
-    private LocalDateTime endDate;
+//     @UpdateTimestamp
+//     private LocalDateTime startedAtTime;
 
-    @CreationTimestamp
-    @Column(nullable = false, updatable = false)
-    private LocalDateTime createdAt;
+//     @UpdateTimestamp
+//     private LocalDateTime completedAtTime;
 
-    @UpdateTimestamp
-    @Column(nullable = false)
-    private LocalDateTime updatedAt;
+//     @PrePersist
+//     @PreUpdate
+//     public void validateAssignedDates() {
+//         if (startedAtTime != null && completedAtTime != null && startedAtTime.isAfter(completedAtTime)) {
+//             throw new IllegalArgumentException("startDate must be before or same as endDate");
+//         }
+//     }
 
-    @Size(max = 50)
-    private String createdBy;
+//     @Override
+//     public boolean equals(Object o) {
+//         if (this == o)
+//             return true;
+//         if (!(o instanceof WorkerAssignedJobsHistory))
+//             return false;
 
-    @Size(max = 50)
-    private String updatedBy;
+//         WorkerAssignedJobsHistory that = (WorkerAssignedJobsHistory) o;
+//         if (this.jobAssignmentHistoryId == null || that.jobAssignmentHistoryId == null)
+//             return false;
 
+//         return this.jobAssignmentHistoryId.equals(that.jobAssignmentHistoryId);
+//     }
 
-    @PrePersist
-    @PreUpdate
-    public void validateAssignedDates() {
-        if (startDate != null && endDate != null && startDate.isAfter(endDate)) {
-            throw new IllegalArgumentException("startDate must be before or same as endDate");
-        }
-    }
+//     @Override
+//     public int hashCode() {
+//         return jobAssignmentHistoryId != null ? jobAssignmentHistoryId.hashCode() : 0;
+//     }
 
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof WorkerAssignedJobsHistory)) return false;
-
-        WorkerAssignedJobsHistory that = (WorkerAssignedJobsHistory) o;
-        if (this.assignedHistoryId == null || that.assignedHistoryId == null) return false;
-
-        return this.assignedHistoryId.equals(that.assignedHistoryId);
-    }
-
-    @Override
-    public int hashCode() {
-        return assignedHistoryId != null ? assignedHistoryId.hashCode() : 0;
-    }
-
-    @Override
-    public String toString() {
-        return "WorkerAssignedJobsHistory {" +
-                "assignedHistoryId=" + assignedHistoryId +
-                ", workerId=" + (worker != null ? worker.getWorkerId() : null) +
-                ", jobId=" + jobId +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                ", completionStatus=" + completionStatus +
-                ", employerRating=" + employerRating +
-                ", feedback='" + feedback + '\'' +
-                ", wagePaid=" + wagePaid +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                ", createdBy='" + createdBy + '\'' +
-                ", updatedBy='" + updatedBy + '\'' +
-                '}';
-    }
-}
+//     @Override
+//     public String toString() {
+//         return "WorkerAssignedJobsHistory {" +
+//                 "Assigned history id = " + jobAssignmentHistoryId +
+//                 // ", Assigned by Employer = " + assignedBy +
+//                 ", Assigned to worker = " + assignedTo +
+//                 // ", Assigned to Worker id = " + (assignedTo != null ? assignedTo.getWorkerId()
+//                 // : null) +
+//                 ", Job id = " + jobId +
+//                 ", Worker attendance status = " + attendanceStatus +
+//                 ", Task completion status = " + completionStatus +
+//                 ", Wage paid = " + wagePaid +
+//                 ", Task Assignment created time = " + createdAtTime +
+//                 ", Task Assignment updated time = " + updatedAtTime +
+//                 ", When work started = " + startedAtTime +
+//                 ", When work completed = " + completedAtTime +
+//                 // ", Employer rating = " + employerRating +
+//                 // ", Worker rating = " + workerRating +
+//                 // ", feedback='" + feedback + '\'' +
+//                 '}';
+//     }
+// }

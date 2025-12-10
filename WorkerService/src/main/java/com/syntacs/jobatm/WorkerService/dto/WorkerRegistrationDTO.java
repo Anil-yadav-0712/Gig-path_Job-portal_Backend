@@ -1,21 +1,27 @@
 package com.syntacs.jobatm.WorkerService.dto;
 
-import jakarta.validation.constraints.*;
-
-import lombok.Data;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.syntacs.jobatm.WorkerService.util.PreferredLanguage;
-import com.syntacs.jobatm.WorkerService.util.RegistrationSource;
+import jakarta.persistence.Enumerated;
+import jakarta.annotation.Nullable;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
+import jakarta.validation.constraints.*;
+import lombok.Data;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Set;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import com.syntacs.jobatm.WorkerService.util.AddressDetailsObject;
+import com.syntacs.jobatm.WorkerService.util.DocumentObject;
+import com.syntacs.jobatm.WorkerService.util.EducationDetailsObject;
+import com.syntacs.jobatm.WorkerService.util.JobCategory;
+import com.syntacs.jobatm.WorkerService.util.Languages;
+import com.syntacs.jobatm.WorkerService.util.RegistrationType;
+import com.syntacs.jobatm.WorkerService.util.Skill;
 
 @Data
 public class WorkerRegistrationDTO {
@@ -28,79 +34,103 @@ public class WorkerRegistrationDTO {
     @NotNull
     private LocalDate birthDate;
 
+    // Profile photo upload
+    @Nullable
+    private MultipartFile profilePhoto;
+
+    // Communication details
+    @NotBlank
+    @Size(max = 20)
+    private String workerPhone;
+
     @Email
     @Size(max = 255)
     private String workerEmail;
 
     @NotBlank
-    @Size(max = 20)
-    private String workerPhone;
-
-    @NotBlank
     @Size(max = 100)
     private String workerPassword;
 
+    // Regional Information
+    private AddressDetailsObject workerAddress;
+
+    @Nullable
+    private Double latitude;
+    @Nullable
+    private Double longitude;
+
+    @Min(0)
+    private Integer preferredTravelDistance; // unit in kilometres
+
+    @Enumerated(EnumType.STRING)
+    private Languages preferredLanguage;
+
+    // Educational details
+    private Set<EducationDetailsObject> workerEducationDetails = new HashSet<>();
 
     // Documents
-    @NotBlank
-    @Size(max = 12)
-    private String aadhaarNumber;
+    private Set<DocumentObject> workerDocuments = new HashSet<>();
 
-    @Size(max = 10)
-    private String panNumber;
+    // @NotBlank
+    // @Size(max = 12)
+    // private String aadhaarNumber;
 
-    @Size(max = 20)
-    private String voterCardNumber;
+    // @Size(max = 10)
+    // private String panNumber;
 
-    // Uploaded documents
-    private List<DocumentUploadDTO> documents;
-
-
-    //Registration info
-    @CreationTimestamp
-    private LocalDateTime createdAt;
-
-    @UpdateTimestamp
-    private LocalDateTime updatedAt;
-
-    @NotNull
-    private RegistrationSource createdBy;       // Registration Source (SELF / KIOSK)
-
-    @NotNull
-    private RegistrationSource updatedBy;       // Registration Source (SELF / KIOSK)
-
-    private String kioskIdOfRegistration;
-
-
-    // Regional Info
-    @NotBlank
-    @Size(max = 255)
-    private String location;
-
-    private Integer preferredTravelDistance;
-
-    private PreferredLanguage preferredLanguage;
-
+    // @Size(max = 20)
+    // private String voterCardNumber;
 
     // Career Info
-    @NotBlank
-    @Size(max = 100)
+    @NotBlank(message = "Work category cannot be blank")
+    @Size(max = 25)
     private String workCategory;
 
+    private Set<Skill> skills = new HashSet<>();
+
+    @Nullable
     private Double minWageRange;
+    @Nullable
     private Double maxWageRange;
-    private Double gigLevel;
 
-    private Set<String> skills;
+    @NotNull
+    private RegistrationType createdBy; // Registration Source (SELF / KIOSK)
+    @Nullable
+    private String kioskIdOfRegistration;
 
+    @NotNull
+    private RegistrationType updatedBy; // Registration Source (SELF / KIOSK)
+    @Nullable
+    private String kioskIdOfUpdation;
 
-    // Inner DTO for document upload
-    public static class DocumentUploadDTO {
-        @NotBlank
-        @Size(max = 50)
-        private String documentType;
+    @PrePersist
+    @PreUpdate
+    public void validateWageRange() {
+        if (minWageRange > 0 && maxWageRange > 0 && minWageRange >= maxWageRange) {
+            throw new IllegalArgumentException("min_wage_range must be less than max_wage_range");
+        }
+    }
 
-        @NotNull
-        private MultipartFile file; // or base64 String if JSON only
+    @Override
+    public String toString() {
+        return "WorkerRegistrationDTO {" +
+                ", Name = '" + workerName + '\'' +
+                ", Birth date = " + birthDate +
+                // ", Age (years) = " + getAge() +
+                ", Mobile number = '" + workerPhone + '\'' +
+                ", Email = '" + workerEmail + '\'' +
+                ", Address details = '" + workerAddress + '\'' +
+                ", Location cordinates = (" + latitude + ", " + longitude + ")" +
+                ", Preferred travel distance = " + preferredTravelDistance +
+                ", Preferred language = " + preferredLanguage +
+                ", Educational details = " + workerEducationDetails +
+                ", Uploaded identity proofs = " + workerDocuments +
+                ", Work category = '" + workCategory + '\'' +
+                ", Wage range = (" + minWageRange + " - " + maxWageRange + ")" +
+                ", Created by = " + createdBy +
+                ", Kiosk id of Registration = " + kioskIdOfRegistration +
+                ", Updated by = " + updatedBy +
+                ", Kiosk id of updation = " + kioskIdOfUpdation +
+                '}';
     }
 }

@@ -10,7 +10,7 @@ public class EmployerDocument {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long documentId;
+    private long documentId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employer_id", nullable = false)
@@ -27,13 +27,13 @@ public class EmployerDocument {
     @Column(columnDefinition = "ENUM('PENDING', 'VERIFIED', 'REJECTED') DEFAULT 'PENDING'")
     private DocumentVerificationStatus verificationStatus = DocumentVerificationStatus.PENDING;
 
-    private Long verifiedBy;
+    private long verifiedBy;
 
     private Timestamp verifiedAt;
 
     @CreationTimestamp
     @Column(updatable = false)
-    private Timestamp createdAt;
+    private Timestamp createdAtTime;
 
     // Getters and Setters (omitted for brevity)
 }

@@ -14,10 +14,10 @@ public class Job {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "job_id")
-    private Long jobId;
+    private long jobId;
 
     @Column(name = "employer_id", nullable = false)
-    private Long employerId;
+    private long employerId;
 
     @Column(name = "title", nullable = false)
     private String title;
@@ -32,16 +32,16 @@ public class Job {
     private String location;
 
     @Column(name = "min_budget", nullable = false)
-    private Double minBudget;
+    private double minBudget;
 
     @Column(name = "max_budget", nullable = false)
-    private Double maxBudget;
+    private double maxBudget;
 
     @Column(name = "required_no_of_workers", nullable = false)
-    private Integer requiredNoOfWorkers;
+    private integer requiredNoOfWorkers;
 
     @Column(name = "min_gig_level")
-    private Double minGigLevel;
+    private double minGigLevel;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
@@ -49,17 +49,17 @@ public class Job {
 
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
-    private Timestamp createdAt;
+    private Timestamp createdAtTime;
 
     @UpdateTimestamp
     @Column(name = "updated_at")
-    private Timestamp updatedAt;
+    private Timestamp updatedAtTime;
 
     @Column(name = "completed_at")
     private Timestamp completedAt;
 
     @Column(name = "estimated_duration")
-    private Integer estimatedDuration;
+    private integer estimatedDuration;
 
     @Column(name = "start_date")
     private Date startDate;
@@ -81,5 +81,5 @@ public class Job {
 }
 
 // enum JobStatus {
-//     OPEN, ASSIGNED, IN_PROGRESS, COMPLETED, CANCELLED
+// OPEN, ASSIGNED, IN_PROGRESS, COMPLETED, CANCELLED
 // }

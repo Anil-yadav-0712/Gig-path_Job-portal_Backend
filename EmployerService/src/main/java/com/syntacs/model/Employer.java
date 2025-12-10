@@ -12,7 +12,7 @@ public class Employer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long employerId;
+    private long employerId;
 
     @NotBlank(message = "Name cannot be blank")
     @Size(max = 255)
@@ -58,7 +58,7 @@ public class Employer {
 
     private Boolean isVerified = false;
 
-    private Double rating = 0.0;
+    private double rating = 0.0;
 
     @NotNull(message = "Registration source cannot be null")
     @Enumerated(EnumType.STRING)
@@ -73,10 +73,10 @@ public class Employer {
 
     @CreationTimestamp
     @Column(updatable = false)
-    private Timestamp createdAt;
+    private Timestamp createdAtTime;
 
     @UpdateTimestamp
-    private Timestamp updatedAt;
+    private Timestamp updatedAtTime;
 
     @OneToMany(mappedBy = "employer", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<EmployerDocument> documents = new HashSet<>();

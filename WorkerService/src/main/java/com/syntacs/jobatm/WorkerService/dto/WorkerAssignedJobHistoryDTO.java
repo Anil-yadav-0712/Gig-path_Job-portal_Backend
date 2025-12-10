@@ -9,16 +9,16 @@ import com.syntacs.jobatm.WorkerService.util.CompletionStatus;
 
 @Data
 public class WorkerAssignedJobHistoryDTO {
-    private Long assignedHistoryId;
-    private Long jobId;
+    private long assignedHistoryId;
+    private long jobId;
 
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private CompletionStatus completionStatus; // ASSIGNED, IN_PROGRESS, COMPLETED
-    private Double employerRating;
+    private double employerRating;
     private String feedback;
-    private Double wagePaid;
+    private double wagePaid;
     private AttendanceStatus attendanceStatus; // PRESENT -ONTIME, PRESENT -LATE, ABSENT -NEVER ARRIVED
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    private LocalDateTime createdAtTime;
+    private LocalDateTime updatedAtTime;
 }

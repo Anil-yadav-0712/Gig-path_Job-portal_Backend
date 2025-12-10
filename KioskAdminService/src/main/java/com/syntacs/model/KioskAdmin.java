@@ -14,7 +14,7 @@ public class KioskAdmin {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long adminId;
+    private long adminId;
 
     @NotBlank(message = "Name cannot be blank")
     @Size(max = 255, message = "Name must not exceed 255 characters")
@@ -54,11 +54,11 @@ public class KioskAdmin {
 
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
-    private Timestamp createdAt;
+    private Timestamp createdAtTime;
 
     @UpdateTimestamp
     @Column(nullable = false)
-    private Timestamp updatedAt;
+    private Timestamp updatedAtTime;
 
     // Getters and Setters (omitted for brevity)
 }

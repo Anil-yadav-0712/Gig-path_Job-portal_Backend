@@ -6,7 +6,7 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "job_applications", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"job_id", "worker_id"})
+        @UniqueConstraint(columnNames = { "job_id", "worker_id" })
 })
 @Data
 public class JobApplication {
@@ -14,14 +14,14 @@ public class JobApplication {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "application_id")
-    private Long applicationId;
+    private long applicationId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "job_id", nullable = false)
     private Job job;
 
     @Column(name = "worker_id", nullable = false)
-    private Long workerId;
+    private long workerId;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
@@ -33,9 +33,9 @@ public class JobApplication {
 
     @UpdateTimestamp
     @Column(name = "updated_at")
-    private Timestamp updatedAt;
+    private Timestamp updatedAtTime;
 }
 
 // enum JobApplicationStatus {
-//     PENDING, SHORTLISTED, APPROVED, REJECTED, COMPLETED, CANCELLED
+// PENDING, SHORTLISTED, APPROVED, REJECTED, COMPLETED, CANCELLED
 // }

@@ -26,7 +26,7 @@ public class JobRequiredSkill {
     public static class JobRequiredSkillId implements Serializable {
 
         @Column(name = "job_id")
-        private Long jobId;
+        private long jobId;
 
         @Column(name = "skill")
         private String skill;

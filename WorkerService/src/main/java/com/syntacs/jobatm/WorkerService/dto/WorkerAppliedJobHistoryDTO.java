@@ -5,11 +5,11 @@ import java.time.LocalDateTime;
 
 @Data
 public class WorkerAppliedJobHistoryDTO {
-    private Long appliedHistoryId;
-    private Long jobId;
-    
-    private String applicationStatus;  // PENDING, APPROVED, REJECTED, etc.
+    private long appliedHistoryId;
+    private long jobId;
+
+    private String applicationStatus; // PENDING, APPROVED, REJECTED, etc.
     private String rejectionReason;
     private LocalDateTime appliedAt;
-    private LocalDateTime updatedAt;
+    private LocalDateTime updatedAtTime;
 }

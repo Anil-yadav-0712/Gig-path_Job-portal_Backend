@@ -13,14 +13,14 @@ public class JobAssignment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "assignment_id")
-    private Long assignmentId;
+    private long assignmentId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "job_id", nullable = false)
     private Job job;
 
     @Column(name = "worker_id", nullable = false)
-    private Long workerId;
+    private long workerId;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "application_id", nullable = false)

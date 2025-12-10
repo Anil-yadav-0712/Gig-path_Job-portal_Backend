@@ -1,0 +1,8 @@
+package com.syntacs.jobatm.WorkerService.util;
+
+public enum Qualifications {
+    ILLITERATE, BELOW_MATRICULATION, HOME_SCHOOLED,
+    MATRICULATION, HIGH_SCHOOL, ITI, DIPLOMA, GRADUATE, POST_GRADUATE, PHD,
+    BBA, MBA, B_TECH,
+    MBBS, BHMS, NURSING, AGRICULTURE, PHARMACY,
+}

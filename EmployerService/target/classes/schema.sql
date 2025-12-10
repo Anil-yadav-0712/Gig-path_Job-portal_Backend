@@ -13,7 +13,7 @@ CREATE TABLE employers (
     business_name VARCHAR(255),
     location VARCHAR(255) NOT NULL,
     is_verified BOOLEAN DEFAULT FALSE,
-    rating DOUBLE DEFAULT 0.0,
+    rating double DEFAULT 0.0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     registration_source ENUM('SELF', 'KIOSK') NOT NULL,
@@ -27,9 +27,13 @@ CREATE TABLE employer_documents (
     employer_id BIGINT NOT NULL,
     document_type VARCHAR(50) NOT NULL,
     document_number VARCHAR(100),
-    verification_status ENUM('PENDING', 'VERIFIED', 'REJECTED') DEFAULT 'PENDING',
+    verification_status ENUM(
+        'PENDING',
+        'VERIFIED',
+        'REJECTED'
+    ) DEFAULT 'PENDING',
     verified_by BIGINT,
     verified_at TIMESTAMP,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (employer_id) REFERENCES employers(employer_id) ON DELETE CASCADE
+    FOREIGN KEY (employer_id) REFERENCES employers (employer_id) ON DELETE CASCADE
 );
